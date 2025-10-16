@@ -259,22 +259,10 @@ curl -X POST http://localhost:23459/api/tracking/detail \
 - **CSRF token tidak ditemukan**: Pastikan halaman login `base_url + /sim` bisa diakses dan struktur HTML tidak berubah drastis. Fungsi `get_csrf_token` mengandalkan pencocokan pola tertentu.
 - **PDF tidak ditemukan**: Server detail mungkin menyimpan PDF lewat `<embed>` atau path relatif; fungsi mencoba beberapa pola tapi tidak sempurna untuk semua variasi.
 - **Login gagal padahal kredensial benar**: Cek parameter `lokasi` (db_name) dan struktur response setelah post login. Beberapa instalasi MPP mungkin mengarahkan atau memberi response berbeda.
-- **Masalah SSL**: Jika target memakai sertifikat self-signed, library `requests` akan menolak — `verify=False` sudah diterapkan, namun di production Anda harus menimbang keamanan.
 
 ---
 
-## 🔒 Keamanan
 
-- Token saat ini disimpan di file, lebih baik pindahkan ke env var bila ingin dipakai production:
-
-```python
-import os
-API_TOKEN = os.getenv("API_TOKEN", "tokentrackingmpp20251110")
-```
-
-- Hati-hati dengan `verify=False` — ini menonaktifkan verifikasi SSL dan **tidak aman** untuk production.
-
----
 
 ## 🧾 Lisensi & Catatan
 
